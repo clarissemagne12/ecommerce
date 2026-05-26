@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: clarisse
+      MYSQL_DATABASE: livraison1
+    ports:
+      - "3308:3306"   # port libre sur Windows
+
+  demo5:
+    image: ecommerce
+    depends_on:
+      - mysql
+    ports:
+      - "8084:8083"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/livraison1
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: clarisse
+      SPRING_SECURITY_USER_NAME: admin
+      SPRING_SECURITY_USER_PASSWORD: admin123
